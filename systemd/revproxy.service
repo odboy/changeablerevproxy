@@ -1,0 +1,17 @@
+[Unit]
+Description=Changable Reverse Proxy Tool
+After=network.target
+Requires=v2ray.service nginx.service
+
+[Service]
+DynamicUser=yes
+Type=simple
+ExecStart=/usr/local/bin/changeablerevproxy -t 11443
+ExecStop=/bin/kill -s KILL $MAINPID
+KillMode=control-group
+Restart=on-failure
+TimeoutSec=5
+TimeoutStopSec=1
+
+[Install]
+WantedBy=multi-user.target
